@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1>CameraUI Module Documentation</h1>
+    <p>
+        <strong>CameraUI</strong> is a client-side Luau module for Roblox that allows you to create and manage UI elements that are rendered in 3D space, attached to the camera. It is intended for use on the client; server-side integration is up to the developer.
+    </p>
+    <h2>Features</h2>
+    <ul>
+        <li>Create 3D UI elements that follow the camera</li>
+        <li>Attach custom UI and parts to the camera</li>
+        <li>Control position, rotation, size, and transparency of UI elements</li>
+        <li>Support for tweening UI elements</li>
+        <li>Easy management and cleanup of UI elements</li>
+    </ul>
+    <h2>Usage</h2>
+    <pre><code>
+local CameraUI = require(path.to.CameraUI)
+
+-- Create a new UI measurement controller
+local measurement = CameraUI:CreateUIMeasurement()
+
+-- Create a new Camera UI element
+local element = CameraUI:CreateUIElement({
+    name = "MyElement",
+    distanceAway = 10,
+    uiElement = myGuiElement, -- Instance of a GuiBase
+    customPart = nil,         -- Optional: custom part to use
+    customFace = Enum.NormalId.Front, -- Optional: face for SurfaceGui
+    position = {X = 0, Y = 0},       -- Optional: initial position
+    rotation = {X = 0, Y = 0, Z = 0} -- Optional: initial rotation
+})
+    </code></pre>
+    <h2>API Reference</h2>
+    <h3>CameraUI:CreateUIMeasurement()</h3>
+    <p>Creates a new measurement controller for camera UI.</p>
+
+    <h3>CameraUI:CreateUIElement(data)</h3>
+    <p>
+        Creates a new camera UI element.<br>
+        <strong>data</strong>: Table with the following fields:
+        <ul>
+            <li><code>name</code> (string): Name of the UI element</li>
+            <li><code>distanceAway</code> (number): Distance from the camera (min 5, max 20)</li>
+            <li><code>uiElement</code> (GuiBase, optional): The UI to display</li>
+            <li><code>customPart</code> (Part, optional): Custom part to use</li>
+            <li><code>customFace</code> (Enum.NormalId, optional): Face for SurfaceGui</li>
+            <li><code>position</code> (table, optional): {X, Y} offset</li>
+            <li><code>rotation</code> (table, optional): {X, Y, Z} rotation in degrees</li>
+        </ul>
+        Returns an object with methods to control the element.
+    </p>
+
+    <h3>Element Methods</h3>
+    <ul>
+        <li><code>DeleteElement(waitTime)</code>: Deletes the element after an optional delay</li>
+        <li><code>GetData()</code>: Returns internal data for the element</li>
+        <li><code>GetPartItself()</code>: Returns the underlying Part</li>
+        <li><code>DisconnectLiver()</code>: Disconnects the RenderStepped connection</li>
+        <li><code>SetCFrame(position)</code>: Sets the X, Y offset</li>
+        <li><code>SetRotation(rotation)</code>: Sets the rotation (X, Y, Z)</li>
+        <li><code>AddGuiElement(guiElement)</code>: Adds a GuiBase to the SurfaceGui</li>
+        <li><code>SetTransparency(value)</code>: Sets the part's transparency</li>
+        <li><code>SetSize(size)</code>: Sets the part's size (Vector3)</li>
+        <li><code>TweenUIElement(goalCFrame, tweenInfo)</code>: Tweens the part to a new CFrame</li>
+    </ul>
+
+    <h3>CameraUI:GetActiveElement(name, data)</h3>
+    <p>
+        Returns the OOP object for the active element with the given name.
+    </p>
+
+    <h2>Notes</h2>
+    <ul>
+        <li>This module is intended for client-side use only.</li>
+        <li>Report bugs on the devforum page.</li>
+    </ul>
+</body>
+</html>
